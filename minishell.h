@@ -141,6 +141,7 @@ typedef struct s_data{
 	int		check;
 	int		check_to;
 	int		checkbis;
+	int		checkter;
 	int		echo;
 	int		flag_uxu;
 	int		dot_n_zero;

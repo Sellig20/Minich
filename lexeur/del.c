@@ -27,9 +27,7 @@ char	*ft_expand_one_btw_quot(t_list **tmp, t_list **envcp, t_data *x)
 			new_echo = ft_result(envcp, res,
 					((t_words *)(*tmp)->next->content)->word, x);
 			if (ft_strlen(new_echo) == 0)
-			{
 				return (new_echo);
-			}
 		}
 		else
 			new_echo = ft_strdup(((t_words *)(*tmp)->content)->word);
@@ -39,18 +37,48 @@ char	*ft_expand_one_btw_quot(t_list **tmp, t_list **envcp, t_data *x)
 	return (new_echo);
 }
 
-char	**doll(char **btw, t_list **tmp, t_list **envcp, t_data *x)
+void	add_doll(char *word, char **btw)
 {
-	char	*word;
-	char	*word2;
 	char	**words;
 	int		i;
 	int		j;
 
 	i = 0;
 	j = 0;
-	words = NULL;
+	words = ft_split(word, ' ');
+	unprotect_space(words);
+	while (btw && btw[i])
+		i++;
+	while (words && words[j])
+		btw[i++] = ft_strdup(words[j++]);
+	ft_free_w(words);
+}
+
+void	append_doll(char *word, char **btw)
+{
+	char	*word2;
+	int		i;
+
+	i = 0;
 	word2 = NULL;
+	protect_space(word, -1);
+	while (btw && btw[i])
+		i++;
+	if (i == 0)
+		btw[0] = ft_strdup(word);
+	else
+	{
+		word2 = ft_strjoin(btw[i - 1], word);
+		free(btw[i - 1]);
+		btw[i - 1] = ft_strdup(word2);
+		free(word2);
+	}
+}
+
+char	**doll(char **btw, t_list **tmp, t_list **envcp, t_data *x)
+{
+	char	*word;
+
 	word = ft_expand_one_btw_quot(tmp, envcp, x);
 	if (!word)
 	{
@@ -58,32 +86,11 @@ char	**doll(char **btw, t_list **tmp, t_list **envcp, t_data *x)
 		return (btw);
 	}
 	if (x->check != D_QUOTE_STATE)
-	{
-		dprintf(2, "doll: word=%s,\n", word);
-		words = ft_split(word, ' ');
-		unprotect_space(words);
-		while (btw && btw[i])
-			i++;
-		while (words && words[j])
-			btw[i++] = ft_strdup(words[j++]);
-	}
+		add_doll(word, btw);
 	else
-	{
-		protect_space(word, -1);
-		while (btw && btw[i])
-			i++;
-		if (i == 0)
-			btw[0] = ft_strdup(word);
-		else
-		{
-			word2 = ft_strjoin(btw[i - 1], word);
-			free(btw[i - 1]); 
-			btw[i - 1] = ft_strdup(word2);
-			free(word2);
-		}
-	}
+		append_doll(word, btw);
 	*tmp = (*tmp)->next;
-	return (ft_free_w(words), free(word), btw);
+	return (free(word), btw);
 }
 
 static char	**doll_btw_del(t_list **tmp, char **btw, t_list **envcp, t_data *x)

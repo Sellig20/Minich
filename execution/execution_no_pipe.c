@@ -14,7 +14,6 @@
 
 extern int	g_status;
 
-
 void	ft_exec_no_pipes(t_list **cmdredir, t_list **cpenv, t_data *x)
 {
 	t_list	*tmp;

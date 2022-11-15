@@ -37,7 +37,6 @@ static char	*put_null(char *word, t_data *x)
 		free(word);
 		word = malloc(sizeof(char) * 1);
 		word[0] = '\0';
-
 	}
 	else if (ft_strcmp(word, "fake2\0") == 0)
 	{
@@ -50,21 +49,35 @@ static char	*put_null(char *word, t_data *x)
 	return (word);
 }
 
+void	put_wesh_words(char **words, t_list **tmp, t_data *x)
+{
+	t_list	*new;
+	int		i;
+
+	new = 0;
+	i = 1;
+	while (words[i])
+	{
+		words[i] = put_null(words[i], x);
+		new = put_new(x, words[i++]);
+		ft_insert(new, *tmp);
+		(*tmp) = (*tmp)->next;
+	}
+	free(words);
+}
+
 static void	first_word(t_list **tmp, t_list **lst, t_list **envcp, t_data *x)
 {
 	char	**words;
 	t_list	*new;
 	t_list	*end;
-	int		i;
 
 	x->checkbis = 0;
 	end = find_end_del(*tmp);
 	words = until_next_del(*tmp, end, envcp, x);
 	delete_btw_del(end, tmp);
 	if (!words)
-	{
 		words[0] = calloc(sizeof(char), 1);
-	}
 	words[0] = put_null(words[0], x);
 	new = put_new(x, words[0]);
 	if (!end)
@@ -76,15 +89,7 @@ static void	first_word(t_list **tmp, t_list **lst, t_list **envcp, t_data *x)
 		(*lst)->next = end;
 	}
 	*tmp = *lst;
-	i = 1;
-	while (words[i])
-	{
-		words[i] = put_null(words[i], x);
-		new = put_new(x, words[i++]);
-		ft_insert(new, *tmp);
-		(*tmp) = (*tmp)->next;
-	}
-	free(words);
+	put_wesh_words(words, tmp, x);
 }
 
 static void	other_word(t_list **tmp, t_list **envcp, t_data *x)

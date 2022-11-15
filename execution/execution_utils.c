@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 18:41:45 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/11/15 17:12:10 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/15 01:45:32 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,16 @@ void	ft_loop_redirections_prot(t_list **redir, t_data *x)
 	tmp_redir = *redir;
 	if (ft_is_redirection_in(&tmp_redir) == 1)
 	{
-		if (x->infile < 0)
-			close(x->infile);
+		// if (x->infile < 0)
+		// 	close(x->infile);
 		if (x->count_files > 0 && x->infile)
 			close(x->infile);
 		ft_no_pipe_redirection_in(&tmp_redir, x);
 	}
 	if (ft_is_redirection_out(&tmp_redir) == 1)
 	{
-		if (x->outfile < 0)
-			ft_close_files(x);
+		// if (x->outfile < 0)
+		// 	ft_close_files(x);
 		if (x->count_files > 0 && x->outfile)
 			close(x->outfile);
 		ft_no_pipe_redirection_out(&tmp_redir, x);

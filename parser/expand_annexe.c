@@ -113,9 +113,13 @@ char	*ft_expand_4(char *new_word, t_dollar *d)
 		new_word = ft_expand_not_found_4(d, new_word);
 		return (new_word);
 	}
-	word = new_word;
-	free(new_word);
-	new_word = ft_strjoin(word, d->save);
+	if (new_word)
+	{
+		word = ft_strdup(new_word);
+		free(new_word);
+		new_word = ft_strjoin(word, d->save);
+		free(word);
+	}
 	free(d->save);
 	free(d->tmp);
 	return (new_word);

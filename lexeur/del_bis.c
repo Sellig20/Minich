@@ -57,10 +57,7 @@ char	**append_last_word(t_list *tmp, char **btw_del)
 	char	*word;
 
 	i = get_last_index(btw_del);
-	//if ( i > 0)
-	//dprintf(2, "btwdel[%i]=%s,\n", i, btw_del[i]);
 	word = ft_strjoin(btw_del[i], ((t_words *)tmp->content)->word);
-//	dprintf(2, "append result = %s\n", word);
 	if (btw_del[i])
 		free(btw_del[i]);
 	btw_del[i] = ft_strdup(word);
@@ -70,17 +67,10 @@ char	**append_last_word(t_list *tmp, char **btw_del)
 
 void	quotes(t_data *x, t_list *tmp)
 {
-	//dprintf(2, "suis la \n");
 	if (((t_words *)tmp->content)->token == TOK_QUOT
 		&& x->check == DEFAULT_STATE && x->check_to++ >= DEFAULT_STATE)
-		{
-			//dprintf(2, "-------------------entered D_QUOT state-------------\n");
-			x->check = D_QUOTE_STATE;
-		}
+		x->check = D_QUOTE_STATE;
 	else if (((t_words *)tmp->content)->token == TOK_QUOT
 		&& x->check == D_QUOTE_STATE)
-		{
-			x->check = DEFAULT_STATE;
-			//dprintf(2, "-------------------reentered DEFAULT_QUOT state -------------\n");
-		}
+		x->check = DEFAULT_STATE;
 }

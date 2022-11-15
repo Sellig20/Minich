@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 SRCS= main.c \
+      	  visu.c \
 	  ./lexeur/lexeur.c \
 	  ./lexeur/lexeur_lexical.c \
 	  ./lexeur/lexeur_lexical_utils.c \
