@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 12:20:15 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/11/14 23:13:30 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/15 19:41:23 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,19 @@ char	*ft_expand_found_4(t_dollar *d, char *new_word)
 	return (new_word);
 }
 
+char	*ft_new_word_4(char *new_word, t_dollar *d)
+{
+	char	*word;
+
+	word = ft_strdup(new_word);
+	free(new_word);
+	new_word = ft_strjoin(word, d->save);
+	return (free(word), new_word);
+}
+
 char	*ft_expand_4(char *new_word, t_dollar *d)
 {
 	char	*tmp;
-	char	*word;
 
 	d->comp = 0;
 	while (d->envcp)
@@ -114,13 +123,6 @@ char	*ft_expand_4(char *new_word, t_dollar *d)
 		return (new_word);
 	}
 	if (new_word)
-	{
-		word = ft_strdup(new_word);
-		free(new_word);
-		new_word = ft_strjoin(word, d->save);
-		free(word);
-	}
-	free(d->save);
-	free(d->tmp);
-	return (new_word);
+		new_word = ft_new_word_4(new_word, d);
+	return (free(d->tmp), free(d->save), new_word);
 }
