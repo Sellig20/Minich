@@ -6,42 +6,13 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 17:56:57 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/11/15 01:38:53 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/15 17:00:31 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 extern int	g_status;
-
-int	ft_is_dot(t_list **tmp, t_data *x)
-{
-	t_list	*list;
-	char	*dot;
-	int tutu = 0;
-	int i = 0;
-	(void)x;
-	dot = NULL;
-	list = *tmp;
-	while (list)
-	{
-		i = 0;
-		dot = ((t_words *)list->content)->word;
-		if (dot && dot[0] == '.')
-		{
-			while (dot && dot[i])
-			{
-				if (dot[i] != '.')
-					tutu++;
-				i++;
-			}
-		}
-			list = list->next;
-	}
-	if (tutu > 0)
-		return (EXIT_SUCCESS);
-	return (EXIT_FAILURE);
-}
 
 
 void	ft_exec_no_pipes(t_list **cmdredir, t_list **cpenv, t_data *x)
@@ -61,7 +32,6 @@ void	ft_exec_no_pipes(t_list **cmdredir, t_list **cpenv, t_data *x)
 	{
 		if (ft_is_builtin(&tmp, x, cpenv) == 0)
 			return (ft_close_files(x));
-		// else if (ft_is_dot(&cmd, x) == 0)
 		else if (ft_is_exe(&cmd, x, cpenv) == 0)
 			ft_no_pipe_is_executable(&tmp, cpenv, x);
 		else if (ft_is_exe(&cmd, x, cpenv) == 2)

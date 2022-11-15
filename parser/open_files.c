@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:53:21 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/11/15 01:37:10 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/15 17:09:21 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,13 @@ int	ft_read_infile(char *infile, t_data *x)
 	dprintf(2, "fd = %d | file = %s\n", file, infile);
 	if (file < 0)
 	{
+		ft_close_files(x);
 		ft_putstr_fd("Minimichel : ", 2);
 		perror(infile);
 		if (x->flag_no_pipe_no_cmd_ok_redir == 0)
 		{
+			if (x->flag_redir_builtin == 1)
+				return EXIT_SUCCESS;
 			ft_lstclear(x->cpv, ft_free_words);
 			ft_exit_bis("1", x);
 		}
@@ -53,6 +56,8 @@ int	ft_read_outfile_append(char *outfile, t_data *x)
 		perror (outfile);
 		if (x->flag_no_pipe_no_cmd_ok_redir == 0)
 		{
+			if (x->flag_redir_builtin == 1)
+				return EXIT_SUCCESS;
 			ft_lstclear(x->cpv, ft_free_words);
 			ft_exit_bis("1", x);
 		}
@@ -77,6 +82,8 @@ int	ft_read_outfile(char *outfile, t_data *x)
 		perror (outfile);
 		if (x->flag_no_pipe_no_cmd_ok_redir == 0)
 		{
+			if (x->flag_redir_builtin == 1)
+				return EXIT_SUCCESS;
 			ft_lstclear(x->cpv, ft_free_words);
 			ft_exit_bis("1", x);
 		}
