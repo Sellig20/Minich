@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:53:21 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/11/15 17:09:21 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/15 19:17:41 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	ft_read_infile(char *infile, t_data *x)
 //	dprintf(2, "fd = %d | file = %s\n", file, infile);
 	if (file < 0)
 	{
+		x->flag_file_down = 42;
 		ft_putstr_fd("Minimichel : ", 2);
 		perror(infile);
 		ft_close_files(x);
@@ -40,6 +41,7 @@ int	ft_read_infile(char *infile, t_data *x)
 			g_status = 1;
 	}
 	x->count_files++;
+	dprintf(2, "FILEEEEEEEEEEEEEE=> %d\n", file);
 	return (file);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:35:03 by evsuits           #+#    #+#             */
-/*   Updated: 2022/11/14 23:37:37 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/15 19:13:32 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ typedef struct s_data{
 	int		first_is_dot;
 	int		isalpha;
 	int		dot_space;
+	int		flag_file_down;
 }	t_data;
 
 enum	e_quote_state

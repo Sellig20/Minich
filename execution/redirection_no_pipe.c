@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 14:39:40 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/11/15 01:43:23 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/15 19:19:03 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ft_annexe_out_no_pipe(t_list **list, t_data *x)
 	t_list	*tmp;
 
 	tmp = *list;
+	if (x->flag_file_down == 42)
+		return ;
 	x->outfile = ft_read_outfile(((t_words *)tmp->next->content)->word, x);
 	if (x->outfile > -1)
 	{
@@ -61,9 +63,7 @@ void	ft_no_pipe_redirection_in(t_list **redir, t_data *x)
 				if (x->flag_no_pipe_no_cmd_ok_redir == 1)
 					ft_close_files(x);
 				if (x->flag_redir_builtin == 1)
-				{
 					return ;
-				}
 				else
 					ft_redirection_in(x->infile);
 			}

@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:29:16 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/11/14 23:53:27 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/15 19:14:01 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ void	ft_reset_2x(t_data *x)
 	x->first_is_dot = 0;
 	x->isalpha = 0;
 	x->dot_space = 0;
+	x->flag_file_down = 0;
 	x->line = readline("$>");
 }
