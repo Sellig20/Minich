@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:44:25 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/11/12 16:58:15 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/16 03:07:26 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	ft_cmd_constructor(t_list **cmd, t_data *x, t_list **cpenv)
 				&& access(&(((t_words *)cmd_line->content)->word[0]),
 					X_OK) != 0)))
 	{
-		ft_putstr_fd("Minimicheliiiiii :", 2);
+		ft_putstr_fd("Minimicheli :", 2);
 		perror(&((t_words *)cmd_line->content)->word[0]);
 		ft_lstclear(cpenv, ft_free_words);
 		ft_exit_bis("127", x);

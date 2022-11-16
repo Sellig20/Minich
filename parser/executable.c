@@ -6,11 +6,13 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:33:46 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/11/16 01:43:52 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/16 03:12:40 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+extern int	g_status;
 
 void	*ft_calloc(size_t count, size_t size)
 {

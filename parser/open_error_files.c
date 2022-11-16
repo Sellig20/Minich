@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:54:44 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/11/16 02:03:54 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/16 03:16:22 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_isad_error(char *file, t_data *x, t_list **cpenv)
 		ft_exit_bis("1", x);
 	}
 	else if (x->flag_uxu == 5)
-		g_status = 1;
+		g_status = 126;
 	else
-		g_status = 0;
+		g_status = 1;
 }
