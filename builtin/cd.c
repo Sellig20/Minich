@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:43:55 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/11/14 23:33:54 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/16 02:49:41 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ char	*ft_cd_dash(char *str, t_list **cpenv, t_data *x)
 	{
 		if (ft_strncmp(((t_words *)envcp->content)->word, "OLDPWD=", 7) == 0)
 			tmp = ((t_words *)envcp->content)->word;
-		else
-			return (ft_putstr_fd("Minimichel: cd: OLDPWD not set\n", 2), NULL);
 		envcp = envcp->next;
 	}
+	if (!tmp)
+		return (ft_putstr_fd("Minimichel: cd: HOME not set\n", 2), NULL);
 	len = ft_strlen(tmp) - 7;
 	str_dash = malloc(sizeof(char) * (len + 1));
 	if (!str_dash)
@@ -56,13 +56,10 @@ char	*ft_cd_home(char *tmp, t_list **cpenv)
 	{
 		if (ft_strncmp(((t_words *)envcp->content)->word, "HOME=", 5) == 0)
 			tmp = ((t_words *)envcp->content)->word;
-		else
-		{
-			ft_putstr_fd("Minimichel: cd: Home not set\n", 2);
-			return (NULL);
-		}
 		envcp = envcp->next;
 	}
+	if (!tmp)
+		return (ft_putstr_fd("Minimichel: cd: HOME not set\n", 2), NULL);
 	len = ft_strlen(tmp) - 5;
 	str_home = malloc(sizeof(char) * (len + 1));
 	if (!str_home)
@@ -108,7 +105,7 @@ int	ft_cd_organisation(char *tmp, t_list **cpenv, char *str, t_data *x)
 
 	word1 = getcwd(NULL, 0);
 	if (!word1)
-		return (EXIT_SUCCESS);
+		return (ft_putstr_fd("getcwd: cannot access directory\n", 2), 0);
 	word = ft_strjoin("OLDPWD=", word1);
 	free(word1);
 	if (str && str[0] == '~')
@@ -127,7 +124,7 @@ int	ft_cd_organisation(char *tmp, t_list **cpenv, char *str, t_data *x)
 		else
 			return (free(word), free(tmp), EXIT_FAILURE);
 	}
-	return (free(tmp), free(word), EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }
 
 int	ft_cd(t_list *cmdredir, t_list **cpenv, t_data *x)

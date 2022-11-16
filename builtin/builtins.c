@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 13:23:01 by evsuits           #+#    #+#             */
-/*   Updated: 2022/11/15 18:50:21 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/16 00:38:41 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int	ft_is_builtin(t_list **cmdredir, t_data *x, t_list **cpenv)
 			ft_loop_redirections_prot(&redir, x);
 			redir = redir->next;
 		}
+		if (x->flag_file_down == 42)
+			return (EXIT_SUCCESS);
 		while ((g_lookup[x->builtin].b != 0))
 		{
 			if (ft_go_builtin(&tmp, &cmd, x, cpenv) == EXIT_SUCCESS)
@@ -78,7 +80,5 @@ int	ft_is_builtin(t_list **cmdredir, t_data *x, t_list **cpenv)
 			x->builtin++;
 		}
 	}
-	else
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
 }

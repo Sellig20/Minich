@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 01:40:04 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/11/08 23:44:05 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/16 02:41:37 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	ft_cd_is_dash(char *tmp1, char *word, t_list *cpenv, t_data *x)
 	char	*tmp;
 
 	tmp = ft_cd_dash(tmp1, &cpenv, x);
+	if (!tmp)
+		return (free(tmp), free(tmp1), free(word));
 	if (chdir(tmp) == 0)
 		ft_change_oldpwd(word, cpenv, x);
 	free(tmp);
@@ -46,6 +48,8 @@ void	ft_cd_is_back(char *tmp1, char *word, t_list *cpenv, t_data *x)
 	char	*tmp;
 
 	tmp = ft_cd_back(tmp1);
+	if (!tmp)
+		return (free(tmp), free(tmp1), free(word));
 	if (chdir(tmp) == 0)
 		ft_change_oldpwd(word, cpenv, x);
 	free(tmp);
@@ -58,6 +62,8 @@ void	ft_cd_is_til(char *tmp1, char *word, t_list *cpenv, t_data *x)
 	char	*tmp;
 
 	tmp = ft_cd_home(tmp1, &cpenv);
+	if (!tmp)
+		return (free(tmp), free(word), free(tmp1));
 	if (chdir(tmp) == 0)
 		ft_change_oldpwd(word, cpenv, x);
 	free(tmp);

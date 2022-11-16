@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:35:03 by evsuits           #+#    #+#             */
-/*   Updated: 2022/11/15 19:13:32 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/16 02:19:19 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ typedef struct s_data{
 	int		isalpha;
 	int		dot_space;
 	int		flag_file_down;
+	int		is_pi;
 }	t_data;
 
 enum	e_quote_state
@@ -276,7 +277,7 @@ void		ft_check_ambi(t_list **tmp, t_data *x);
 int			ft_is_null(char *cmd);
 int			ft_is_space(char *cmd);
 char		*ft_join_options(t_list **cmd, t_data *x);
-char		*ft_check_exec(char *str, t_data *x, t_list **cpenv);
+char		*ft_check_exec(char *str, t_data *x, t_list **cpenv, char *final);
 char		*ft_get_executable(char	*final);
 
 //heredoc_utils.c
@@ -320,6 +321,7 @@ char		**get_env(t_list *cpenv);
 
 ////////////////////////////////EXECUTION///////////////////////////
 void		ft_exec_organisor(t_list **after_doll, t_list **cpenv, t_data *x);
+int			ft_exec_no_pipe_bis(t_list **cmdredir, t_data *x, t_list **cpenv);
 
 //execution_utils.c
 int			ft_nb_cmd(t_list **lst);
@@ -335,7 +337,7 @@ void		ft_exec_no_pipe_annexe(t_list **cmdredir,
 void		ft_proc_no_pipe(t_list **cmd, t_list **redir,
 				t_data *x, t_list **cpenv);
 void		ft_no_pipe_no_cmd_redir(t_list **redir, t_data *x);
-void		ft_no_pipe_is_executable(t_list **cmdredir,
+int		ft_no_pipe_is_executable(t_list **cmdredir,
 				t_list **cpenv, t_data *x);
 
 //execution_pipe.c

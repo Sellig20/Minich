@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:55:45 by evsuits           #+#    #+#             */
-/*   Updated: 2022/11/12 18:55:29 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/15 22:48:00 by evsuits          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ int	ft_env(t_list *cmdredir, t_list **cpenv, t_data *x)
 	char	*after_eq;
 	int		index_eq;
 
-	(void) x;
-	(void) cmdredir;
+	if ((((t_cmdredir *)cmdredir->content)->cmd)
+		&& (((t_cmdredir *)cmdredir->content)->cmd->next))
+		return (write(2, "Minimichel: exit: too many arguments\n", 37));
 	tmp = *cpenv;
 	while (tmp)
 	{

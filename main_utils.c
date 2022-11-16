@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 17:29:16 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/11/15 19:14:01 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/16 01:16:16 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	ft_reset_x(t_data *x, t_list *lst_letters,
 	x->finish = 0;
 	x->res_echo = 0;
 	x->only_n = 0;
+	x->is_pi = 0;
 	ft_reset_2x(x);
 }
 

@@ -6,12 +6,11 @@
 #    By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/22 14:34:45 by evsuits           #+#    #+#              #
-#    Updated: 2022/11/15 01:30:30 by jecolmou         ###   ########.fr        #
+#    Updated: 2022/11/16 02:22:07 by jecolmou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS= main.c \
-      	  visu.c \
 	  ./lexeur/lexeur.c \
 	  ./lexeur/lexeur_lexical.c \
 	  ./lexeur/lexeur_lexical_utils.c \

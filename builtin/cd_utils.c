@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 20:12:11 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/11/12 16:59:37 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/15 23:11:31 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ft_check_str(char *str, t_data *x)
 	d = opendir(str);
 	if (d == NULL)
 	{
-		ft_putstr_fd("Miniiiiiimichel : ", 2);
+		ft_putstr_fd("Minimichel : ", 2);
 		g_status = 1;
 		perror(str);
 		return (NULL);

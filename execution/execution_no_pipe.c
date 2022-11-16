@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 17:56:57 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/11/15 17:00:31 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/16 02:19:27 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,8 @@ void	ft_exec_no_pipes(t_list **cmdredir, t_list **cpenv, t_data *x)
 	}
 	if (cmd->content)
 	{
-		if (ft_is_builtin(&tmp, x, cpenv) == 0)
-			return (ft_close_files(x));
-		else if (ft_is_exe(&cmd, x, cpenv) == 0)
-			ft_no_pipe_is_executable(&tmp, cpenv, x);
-		else if (ft_is_exe(&cmd, x, cpenv) == 2)
-			return (ft_error_command_not_f(((t_words *)cmd->content)->word));
-		ft_exec_no_pipe_annexe(&tmp, x, cpenv);
-		signal(SIGQUIT, SIG_IGN);
-		signal(SIGINT, handle_sig_parent);
-		if (x->flag_exua == 2)
-			free(x->pc);
+		if (ft_exec_no_pipe_bis(&tmp, x, cpenv) == EXIT_FAILURE)
+			return ;
 	}
 	else
 		ft_no_pipe_no_cmd_redir(&tmp, x);
@@ -93,8 +84,8 @@ void	ft_proc_no_pipe(t_list **cmd, t_list **redir, t_data *x, t_list **cpenv)
 	{
 		free(x->pc);
 		free(x->option);
+		ft_lstclear(cpenv, ft_free_words);
 	}
-	ft_lstclear(cpenv, ft_free_words);
 }
 
 void	ft_no_pipe_no_cmd_redir(t_list **cmdredir, t_data *x)
@@ -105,7 +96,7 @@ void	ft_no_pipe_no_cmd_redir(t_list **cmdredir, t_data *x)
 	tmp = *cmdredir;
 	tmp_redir = (t_list *)((t_cmdredir *)tmp->content)->redirection;
 	x->flag_no_pipe_no_cmd_ok_redir = 1;
-	while(tmp_redir)
+	while (tmp_redir)
 	{
 		if (ft_is_redirection_in(&tmp_redir) == 1)
 			ft_no_pipe_redirection_in(&tmp_redir, x);
@@ -115,7 +106,7 @@ void	ft_no_pipe_no_cmd_redir(t_list **cmdredir, t_data *x)
 	}
 }
 
-void	ft_no_pipe_is_executable(t_list **cmdredir, t_list **cpenv, t_data *x)
+int	ft_no_pipe_is_executable(t_list **cmdredir, t_list **cpenv, t_data *x)
 {
 	t_list	*cmd;
 	t_list	*tmp;
@@ -127,7 +118,8 @@ void	ft_no_pipe_is_executable(t_list **cmdredir, t_list **cpenv, t_data *x)
 	x->option = NULL;
 	if (x->pc == NULL && x->flag_exua != 4)
 	{
-		free(x->pc);
 		x->flag_exua = 3;
+		return (EXIT_FAILURE);
 	}
+	return (EXIT_SUCCESS);
 }

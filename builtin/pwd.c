@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 09:50:32 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/11/12 18:54:34 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/16 02:48:04 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,24 +53,16 @@ void	ft_print_pwd(char *tmp, t_list *cmdredir, t_data *x)
 
 int	ft_pwd(t_list *cmdredir, t_list **cpenv, t_data *x)
 {
-	char	*word;
 	char	*tmp;
-	char	*join;
 
 	(void)cmdredir;
 	tmp = getcwd(NULL, 0);
-	word = NULL;
+	(void)cpenv;
 	if (tmp)
 		ft_print_pwd(tmp, cmdredir, x);
 	else
 	{
 		ft_print_cd_error();
-		word = ft_cd_home(word, cpenv);
-		join = ft_strjoin("OLDPWD=", word);
-		if (chdir(word) == 0)
-			ft_cd_execption_supp_dir(join, word, cpenv, x);
-		free(word);
-		free(join);
 		return (EXIT_SUCCESS);
 	}
 	free(tmp);

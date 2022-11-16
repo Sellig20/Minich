@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-static int	quote_management(t_letters *letters, int *i)
+static int	quote_management(t_letters *letters, int *i, t_data *x)
 {
 	if (letters->letter == '"' && *i == DEFAULT_STATE)
 	{
@@ -26,13 +26,13 @@ static int	quote_management(t_letters *letters, int *i)
 		*i = DEFAULT_STATE;
 		return (1);
 	}
-	else if (letters->letter == '\'' && *i == DEFAULT_STATE)
+	else if (letters->letter == '\'' && *i == DEFAULT_STATE && x->flag_heredoc == 0)
 	{
 		letters->token = TOK_QUOT;
 		*i = S_QUOTE_STATE;
 		return (1);
 	}
-	else if (letters->letter == '\'' && *i == S_QUOTE_STATE)
+	else if (letters->letter == '\'' && *i == S_QUOTE_STATE && x->flag_heredoc == 0)
 	{
 		letters->token = TOK_QUOT;
 		*i = DEFAULT_STATE;
@@ -49,13 +49,15 @@ static	t_letters	*letters_init(char letter, int *i, t_data *x)
 	if (!letters)
 		return (NULL);
 	letters->letter = letter;
-	if (quote_management(letters, i) == 1)
+	if (quote_management(letters, i, x) == 1)
 		return (letters);
 	else if (letter == '$' && *i != S_QUOTE_STATE)
 		letters->token = TOK_DOLL;
 	else if (x->flag_heredoc != 0)
 		letters->token = TOK_WORD;
-	else if (letter == ' ' && *i == DEFAULT_STATE)
+	else if ((letter == ' ' || letter == '\v'|| letter == '\t'
+		|| letter == '\f'|| letter == '\r'|| letter == '\n')
+			&& *i == DEFAULT_STATE)
 		letters->token = TOK_SPAC;
 	else if (letter == '>' && *i == DEFAULT_STATE)
 		letters->token = TOK_TO;

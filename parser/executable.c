@@ -6,11 +6,22 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:33:46 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/11/15 01:01:30 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/16 01:43:52 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*s;
+
+	s = malloc(count * size);
+	if (s == NULL)
+		return (NULL);
+	ft_bzero(s, size * count);
+	return (s);
+}
 
 char	*ft_transform_executable(char *executable)
 {
@@ -20,7 +31,7 @@ char	*ft_transform_executable(char *executable)
 
 	i = 1;
 	j = 0;
-	final = calloc(sizeof(char), ft_strlen(executable));
+	final = ft_calloc(sizeof(char), ft_strlen(executable));
 	if (!final)
 		return (NULL);
 	while (executable[i])
@@ -29,7 +40,6 @@ char	*ft_transform_executable(char *executable)
 		i++;
 		j++;
 	}
-	final[j] = '\0';
 	return (final);
 }
 
@@ -73,7 +83,6 @@ char	*ft_get_executable(char	*final)
 	if (!final || !tmp)
 		return (NULL);
 	tmp1 = ft_strjoin(tmp, final);
-//	free(final);
 	free(tmp);
 	if (access(tmp1, X_OK) == 0)
 		return (tmp1);
@@ -90,11 +99,14 @@ char	*ft_is_exe2(t_list **tmp, char *isfull, char *final, t_data *x)
 
 	list = *tmp;
 	final = ft_transform_executable(((t_words *)list->content)->word);
-	isfull = ft_check_exec(((t_words *)list->content)->word, x, x->cpv);
+	isfull = ft_check_exec(((t_words *)list->content)->word, x, x->cpv, final);
+	if (isfull == NULL)
+		return (NULL);
 	if (isfull && x->flag_uxu != 88)
 	{
 		x->flag_uxu = 5;
-		ft_isad_error(((t_words *)list->content)->word, x, x->cpv);
+		free(final);
+		return (ft_isad_error(((t_words *)list->content)->word, x, x->cpv), NULL);
 	}
 	isfull = ft_get_executable(final);
 	free(final);

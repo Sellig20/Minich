@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 19:37:56 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/11/12 00:02:34 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/16 01:17:53 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ft_create_pipe(t_list **cmdredir, t_data *x)
 	t_list	*tmp;
 
 	tmp = *cmdredir;
+	x->is_pi = 66;
 	if (pipe(x->fd_pipe) == -1)
 		return (perror("Minimichel: pipe: "));
 	((t_cmdredir *)tmp->next->content)->fd_cmd[0] = x->fd_pipe[0];

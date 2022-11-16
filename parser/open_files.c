@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:53:21 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/11/15 19:17:41 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/16 00:16:36 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	ft_read_infile(char *infile, t_data *x)
 	if (infile == NULL)
 		return (-1);
 	file = open(infile, O_RDONLY);
-//	dprintf(2, "fd = %d | file = %s\n", file, infile);
 	if (file < 0)
 	{
 		x->flag_file_down = 42;
@@ -41,7 +40,6 @@ int	ft_read_infile(char *infile, t_data *x)
 			g_status = 1;
 	}
 	x->count_files++;
-	dprintf(2, "FILEEEEEEEEEEEEEE=> %d\n", file);
 	return (file);
 }
 
@@ -54,6 +52,7 @@ int	ft_read_outfile_append(char *outfile, t_data *x)
 	file = open(outfile, O_CREAT | O_WRONLY | O_APPEND, 0644);
 	if (file < 0)
 	{
+		x->flag_file_down = 42;
 		ft_putstr_fd("Minimichel : ", 2);
 		perror (outfile);
 		if (x->flag_no_pipe_no_cmd_ok_redir == 0)
@@ -77,9 +76,9 @@ int	ft_read_outfile(char *outfile, t_data *x)
 	if (outfile == NULL)
 		return (-1);
 	file = open(outfile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-//	dprintf(2, "fd = %d | file = %s\n", file, outfile);
 	if (file < 0)
 	{
+		x->flag_file_down = 42;
 		ft_putstr_fd("Minimichel : ", 2);
 		perror (outfile);
 		if (x->flag_no_pipe_no_cmd_ok_redir == 0)

@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 17:19:42 by evsuits           #+#    #+#             */
-/*   Updated: 2022/11/09 22:31:30 by evsuits          ###   ########.fr       */
+/*   Updated: 2022/11/15 22:40:55 by evsuits          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	ft_exit(t_list *cmdredir, t_list **cpenv, t_data *x)
 	cmd = ((t_cmdredir *)cmdredir->content)->cmd;
 	if (!(cmd->next))
 		return (write(2, "exit\n", 5), ft_lstclear(cpenv, ft_free_words),
-			ft_free_all(x), exit(0), 5);
+			ft_free_all(x), exit(g_status), 5);
 	cmd = cmd->next;
 	nb = ft_atoll(((t_words *)cmd->content)->word);
 	if (cmd->next)
@@ -70,8 +70,7 @@ int	ft_exit(t_list *cmdredir, t_list **cpenv, t_data *x)
 	}
 	if (ft_is_mul_digit((((t_words *)cmd->content)->word)) == 1
 		&& (nb > 922337203685477807 || nb < -922337203685477808))
-		return (write(2, "exit\n", 5),
-			printf("exit: numeric argument required\n"),
+		return (printf("exit: numeric argument required\n"),
 			ft_free_all(x), ft_lstclear(cpenv, ft_free_words), exit(2), 5);
 	else
 		return (write(2, "exit\n", 5), ft_free_all(x),

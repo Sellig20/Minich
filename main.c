@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:40:12 by evsuits           #+#    #+#             */
-/*   Updated: 2022/11/12 17:29:41 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/15 23:28:24 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(int ac, char **av, char **env)
 		x.segment = x.seg;
 		if (!(x.line))
 			return (write(2, " exit\n", 6), ft_lstclear(x.cpv, ft_free_cpenv),
-				ft_died(x.let, x.wo, x.bp, x.seg), 1);
+				ft_died(x.let, x.wo, x.bp, x.seg), 0);
 		else
 			add_history(x.line);
 		if (pre_lexeur(&x, x.line, x.let) == 0)

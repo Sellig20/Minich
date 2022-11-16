@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 18:42:07 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/11/12 18:25:56 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/16 01:42:40 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_check_ambi(t_list **tmp, t_data *x)
 	}
 }
 
-char	*ft_check_exec(char *str, t_data *x, t_list **cpenv)
+char	*ft_check_exec(char *str, t_data *x, t_list **cpenv, char *final)
 {
 	DIR		*d;
 
@@ -51,9 +51,15 @@ char	*ft_check_exec(char *str, t_data *x, t_list **cpenv)
 		ft_putstr_fd("Minimichel : ", 2);
 		g_status = 1;
 		perror(str);
-		ft_lstclear(cpenv, ft_free_words);
-		ft_exit_bis("1", x);
-		return (NULL);
+		if (final)
+			free(final);
+		if (x->is_pi == 66)
+		{
+			ft_lstclear(cpenv, ft_free_words);
+			ft_exit_bis("1", x);
+		}
+		else
+			return (NULL);
 	}
 	else if (d == NULL && x->i_ex != -1)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 13:34:50 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/11/15 00:03:43 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/11/15 23:03:35 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void	*heredoc_loop(char *new_lim, int fd, t_list **cpenv, t_data *x)
 		if (init_list_heredoc(&letter, &words) < 0)
 			return (free(line), NULL);
 		if (!(line) || ft_strcmp(new_lim, line) == 0)
+		{
+			//message pour ctrl D
 			break ;
+		}
 		pre_lexeur(x, line, letter);
 		group_letters(letter, words);
 		new_expand(words, cpenv, x);
